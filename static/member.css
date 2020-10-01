@@ -1,0 +1,6 @@
+.eye-icon{
+    display: none;
+}
+.posts-list:hover .eye-icon{
+    display: inline;
+}
