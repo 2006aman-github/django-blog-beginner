@@ -9,14 +9,14 @@ class Contact(models.Model):
     date_time = models.DateTimeField()
 
     def __str__(self):
-        return str(self.name) + '|' + str(self.date_time)
+        return str(self.name) + "|" + str(self.date_time)
 
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=5000)
     content = models.TextField()
-    author = models.CharField( max_length=500)
-    added_date = models.DateTimeField()
+    author = models.CharField(max_length=500)
+    added_date = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.title + "|" + str(self.author)
-    

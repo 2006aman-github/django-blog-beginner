@@ -11,7 +11,6 @@ def index(request):
     return render(request, "index.html", {
         "blog_posts": blog_posts
     })
-    
 
 def create(request):
     if request.user.is_anonymous:
@@ -22,9 +21,10 @@ def add_post(request):
     blog_title = request.POST.get("blog-title")
     blog_content = request.POST.get("blog-content")
     blog_author = request.POST.get("blog-author")
-    new_post = BlogPost(title=blog_title, content=blog_content, author=blog_author, added_date=timezone.now())
+    new_post = BlogPost(title=blog_title, content=blog_content, author=blog_author)
     new_post.save()
     return redirect("/")
+
 def about(request):
     return render(request, "about.html")
 
@@ -39,14 +39,12 @@ def contact(request):
         messages.success(request, 'Your Contact has been sent!!')
     return render(request, "contact.html")
 
-
 def full_post(request, post_id):
     f_post = BlogPost.objects.get(id=post_id)
     
     return render(request, "fullpost.html", {
          "f_post": f_post
     })
-
 
 def loginUser(request):
     if request.method == "POST":
@@ -61,11 +59,8 @@ def loginUser(request):
             return redirect("/")
     return redirect("/")
 
-
-
 def login_iblog(request):
     return render(request, "login.html")
-
 
 def member_data(request):
     posts = BlogPost.objects.all().order_by("-added_date")
@@ -84,6 +79,7 @@ def update_post(request, post_id):
     return render(request, "update-post.html", {
         "post": post
     })
+
 def Update(request, post_id):
     post = BlogPost.objects.get(id=post_id)
     if request.method == "POST":
@@ -95,6 +91,7 @@ def Update(request, post_id):
         post.author = author
         post.save()
         return redirect("/member-data")
+
 def logoutUser(request):
     logout(request)
     return redirect("/")
